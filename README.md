@@ -1,7 +1,26 @@
-# llmgater
+<p align="center">
+  <img src="docs/banner.svg" width="100%" alt="llmgater: one async Python API in front of OpenAI, Anthropic and any OpenAI-compatible server">
+</p>
 
-[![CI](https://github.com/lzradeel/llmgater/actions/workflows/ci.yml/badge.svg)](https://github.com/lzradeel/llmgater/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<p align="center">
+  <a href="https://github.com/lzradeel/llmgater/actions/workflows/ci.yml"><img src="https://github.com/lzradeel/llmgater/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-3776AB?logo=python&logoColor=white" alt="Python 3.11 to 3.14">
+  <img src="https://img.shields.io/badge/mypy-strict-2A6DB2" alt="mypy strict">
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff"></a>
+  <img src="https://img.shields.io/badge/pydantic-v2-E92063?logo=pydantic&logoColor=white" alt="Pydantic v2">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
+</p>
+
+<p align="center">
+  <a href="#usage">Usage</a> ·
+  <a href="#how-a-request-is-handled">Architecture</a> ·
+  <a href="#failover-and-retries">Failover</a> ·
+  <a href="#similarity-cache">Caching</a> ·
+  <a href="#typed-outputs">Typed outputs</a> ·
+  <a href="#quotas-and-safety">Quotas and safety</a>
+</p>
+
+<p align="center"><sub>2 runtime dependencies · 161 offline tests · mypy --strict · Python 3.11–3.14</sub></p>
 
 A single async API is placed in front of OpenAI, Anthropic and any OpenAI-compatible server.
 
@@ -161,6 +180,26 @@ Scripted replies and errors are replayed by `ScriptedBackend`, and every request
 pip install -e . --group dev
 pytest && ruff check . && ruff format --check . && mypy src
 ```
+
+<details>
+<summary><b>Project layout</b></summary>
+
+```
+src/llmgater/
+├── core.py          Gater: ask, ask_stream, extract and the failover loop
+├── backends/        Backend base class, HTTP helpers, OpenAI, Anthropic, scripted
+├── backoff.py       jittered exponential backoff
+├── caching.py       similarity cache and embedders
+├── quota.py         per-account token quotas
+├── safety.py        PII scrubber, injection scorer, SafetyFilter
+├── typed_output.py  schema prompt and JSON repair loop
+├── models.py        messages, requests, responses, usage
+└── exceptions.py    error types
+tests/               161 offline tests, run against ScriptedBackend
+examples/            local_tour.py (offline) and live_example.py
+```
+
+</details>
 
 ## License
 

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
+  <title id="title">llmgater</title>
+  <desc id="desc">One async Python API in front of OpenAI, Anthropic and any OpenAI-compatible server. Features: failover, similarity cache, token quotas, PII and injection guard, typed outputs. Diagram: a request goes from an app through the gateway; the first provider fails and the request is rerouted to the next provider.</desc>
+  <style>
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .chip rect { fill: #94A3B8; fill-opacity: .1; stroke: #94A3B8; stroke-opacity: .28; }
+    .chip text { fill: #CBD5E1; font-size: 18px; font-weight: 500; text-anchor: middle; }
+    .flow { stroke-dasharray: .1 24; animation: flow 8s linear infinite; }
+    .pulse { animation: pulse 6s ease-in-out infinite; }
+    @keyframes flow { to { stroke-dashoffset: -192; } }
+    @keyframes pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A0F1E"/>
+      <stop offset="1" stop-color="#131C3A"/>
+    </linearGradient>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="960" cy="160" r="340">
+      <stop offset="0" stop-color="#6366F1" stop-opacity=".26"/>
+      <stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1.2" fill="#94A3B8" fill-opacity=".08"/>
+    </pattern>
+    <linearGradient id="accent" gradientUnits="userSpaceOnUse" x1="828" y1="0" x2="884" y2="0">
+      <stop offset="0" stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="frame" gradientUnits="userSpaceOnUse" x1="0" y1="96" x2="0" y2="230">
+      <stop offset="0" stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#818CF8" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity=".1"/>
+    </linearGradient>
+    <filter id="blur" x="-1" y="-1" width="3" height="3">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <!-- card -->
+  <rect width="1280" height="320" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="320" rx="24" fill="url(#dots)"/>
+  <rect width="1280" height="320" rx="24" fill="url(#glow)"/>
+  <rect x=".5" y=".5" width="1279" height="319" rx="23.5" fill="none" stroke="#94A3B8" stroke-opacity=".16"/>
+
+  <!-- text column -->
+  <text class="mono" x="64" y="98" font-size="64" font-weight="700" fill="#F1F5F9">llmgater</text>
+  <text class="sans" font-size="24" fill="#94A3B8">
+    <tspan x="64" y="142">One async Python API in front of OpenAI,</tspan>
+    <tspan x="64" y="173">Anthropic and any OpenAI-compatible server</tspan>
+  </text>
+  <g class="chip sans">
+    <rect x="64" y="193" width="92" height="34" rx="16"/><text x="110" y="216">failover</text>
+    <rect x="166" y="193" width="162" height="34" rx="16"/><text x="247" y="216">similarity cache</text>
+    <rect x="338" y="193" width="140" height="34" rx="16"/><text x="408" y="216">token quotas</text>
+    <rect x="64" y="237" width="198" height="34" rx="16"/><text x="163" y="260">PII &amp; injection guard</text>
+    <rect x="272" y="237" width="148" height="34" rx="16"/><text x="346" y="260">typed outputs</text>
+  </g>
+
+  <!-- motif: app -> gate -> providers; the first provider fails and the request fails over to the next -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- app -->
+    <rect x="752" y="136" width="76" height="48" rx="12" fill="#131C3A" stroke="#94A3B8" stroke-opacity=".45" stroke-width="1.5"/>
+    <path d="M828 160H884" stroke="url(#accent)" stroke-width="2.5"/>
+    <!-- gate: an archway on a threshold line -->
+    <ellipse class="pulse" cx="912" cy="164" rx="44" ry="64" fill="#6366F1" fill-opacity=".45" filter="url(#blur)"/>
+    <path d="M884 228V128A28 28 0 0 1 940 128V228Z" fill="url(#field)"/>
+    <path d="M884 228V128A28 28 0 0 1 940 128V228" stroke="url(#frame)" stroke-width="7" stroke-linecap="butt"/>
+    <path d="M866 228H958" stroke="#22D3EE" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M884 160H940" stroke="#F1F5F9" stroke-opacity=".9" stroke-width="2.5"/>
+    <circle cx="912" cy="160" r="5" fill="#F1F5F9"/>
+    <!-- fan-out -->
+    <path d="M940 160C1000 160 1002 94 1055 94" stroke="#F87171" stroke-opacity=".85" stroke-width="2" stroke-dasharray="5 6"/>
+    <path d="M940 160C1000 160 1002 226 1062 226" stroke="#94A3B8" stroke-opacity=".4" stroke-width="2" stroke-dasharray="2 6"/>
+    <path d="M940 160H1055" stroke="#34D399" stroke-width="2.5"/>
+    <path class="flow" d="M836 160H876M968 160H1048" stroke="#F1F5F9" stroke-opacity=".85" stroke-width="4"/>
+    <!-- providers -->
+    <rect x="1066" y="70" width="150" height="48" rx="12" fill="#F87171" fill-opacity=".08" stroke="#F87171" stroke-opacity=".55" stroke-width="1.5"/>
+    <rect x="1066" y="136" width="150" height="48" rx="12" fill="#34D399" fill-opacity=".1" stroke="#34D399" stroke-opacity=".7" stroke-width="1.5"/>
+    <rect x="1066" y="202" width="150" height="48" rx="12" fill="#94A3B8" fill-opacity=".06" stroke="#94A3B8" stroke-opacity=".3" stroke-width="1.5"/>
+    <!-- status badges -->
+    <circle cx="1066" cy="94" r="11" fill="#1A1430" stroke="#F87171" stroke-width="1.5"/>
+    <path d="M1062 90l8 8M1070 90l-8 8" stroke="#F87171" stroke-width="2"/>
+    <circle cx="1066" cy="160" r="11" fill="#0F2A2A" stroke="#34D399" stroke-width="1.5"/>
+    <path d="M1061 160.5l3.5 3.5 6.5-7" stroke="#34D399" stroke-width="2"/>
+    <circle cx="1066" cy="226" r="4" fill="#94A3B8" fill-opacity=".6"/>
+  </g>
+  <g class="mono" font-size="18" font-weight="500">
+    <text x="790" y="166" fill="#CBD5E1" text-anchor="middle">app</text>
+    <text x="1088" y="100" fill="#94A3B8">openai</text>
+    <text x="1088" y="166" fill="#F1F5F9">anthropic</text>
+    <text x="1088" y="232" fill="#94A3B8">compatible</text>
+  </g>
+</svg>
